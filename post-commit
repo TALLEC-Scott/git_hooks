@@ -16,4 +16,20 @@ else
   echo "Unable to compile Java project. Unknown build tool."
   exit 1
 fi
+# Get the name of the current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD)
 
+# Check if we are pushing to the staging or production branch
+
+  # Deploy the code to the appropriate environment
+  if [ "$current_branch" = "staging" ]; then
+	  echo "deploying to $current_branch"
+    # Deploy to the staging environment
+    # (replace with the appropriate command for your deployment tool)
+    deploy_to_staging
+  elif [ "$current_branch" = "prod" ]; then
+	  echo "deploying to $current_branch"
+    # Deploy to the production environment
+    # (replace with the appropriate command for your deployment tool)
+    deploy_to_production
+  fi
