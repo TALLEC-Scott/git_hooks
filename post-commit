@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# This is a post-commit git hook that will automatically compile a Java project
+# and create a JAR file every time you push to the remote repository.
+
+# Check if the project uses Maven or Gradle as the build tool
+if [ -f "pom.xml" ]; then
+  # The project uses Maven, so compile it using the 'mvn package' command
+  mvn compile assembly:single
+elif [ -f "build.gradle" ]; then
+  # The project uses Gradle, so compile it using the 'gradle build' command
+  # Change to your liking
+  gradle build
+else
+  # The project does not use Maven or Gradle, so we cannot compile it automatically
+  echo "Unable to compile Java project. Unknown build tool."
+  exit 1
+fi
+
